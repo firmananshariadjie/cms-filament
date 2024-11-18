@@ -10,6 +10,7 @@ use App\Models\GalleryCategory;
 use App\Models\Team;
 use App\Models\Testimonial;
 use App\Models\Article;
+use App\Models\Contact;
 
 class DashboardController extends Controller
 {
@@ -39,6 +40,8 @@ class DashboardController extends Controller
         
         $articles = Article::all();
 
+        $contacts = Contact::all();
+
         // Kirim data ke view
         return view('dashboard.index', with(['bannerContents' => $bannerContents, 
                                             'aboutContents' => $aboutContents,
@@ -52,7 +55,8 @@ class DashboardController extends Controller
                                             'gallery_categories' => $gallery_categories,
                                             'teams' => $teams,
                                             'testimonials' => $testimonials,
-                                            'articles' => $articles,                                        
+                                            'articles' => $articles,  
+                                            'contacts' => $contacts,                                      
                                         ]));
     }
 
