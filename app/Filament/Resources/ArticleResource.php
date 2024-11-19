@@ -19,7 +19,7 @@ class ArticleResource extends Resource
 {
     protected static ?string $model = Article::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-newspaper';
 
     public static function form(Form $form): Form
     {
@@ -125,4 +125,5 @@ class ArticleResource extends Resource
             'edit' => Pages\EditArticle::route('/{record}/edit'),
         ];
     }
+    
 }

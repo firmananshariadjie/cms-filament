@@ -9,4 +9,9 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateTeam extends CreateRecord
 {
     protected static string $resource = TeamResource::class;
+
+    protected function getRedirectUrl(): string
+    {
+        return static::getResource()::getUrl('index'); // Mengarahkan ke halaman Index
+    }
 }

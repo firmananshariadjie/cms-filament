@@ -124,7 +124,9 @@
 
     <!-- Back to Top -->
     <div class="icon-container d-flex justify-content-center align-items-center">
-        <a href="#" class="btn-md-square btn-primary rounded-circle back-to-top" style="display: flex;left: 293.200;top: 592.000;bottom: 80px;">
+        <a href="https://wa.me/082341098559" class="btn-md-square rounded-circle" style="display: flex;left: 293.200;top: 592.000;bottom: 80px; position: fixed;
+        right: 30px;    
+        z-index: 99;">
             <img src="{{ asset('assets/img/wa.png') }}" alt="" style="
             width: 44px;
         ">

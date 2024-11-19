@@ -14,6 +14,8 @@ use App\Models\Contact;
 
 class DashboardController extends Controller
 {
+
+    
     public function index(){
         $bannerContents = Content::where('category', 'banner')->get();
 
@@ -32,13 +34,14 @@ class DashboardController extends Controller
         $services = Service::all();
 
         $galleries = Gallery::limit(8)->get();
+        $gallery_footer = Gallery::limit(6)->get();
         $gallery_categories = GalleryCategory::all();
         
         $teams = Team::limit(4)->get();
         
         $testimonials = Testimonial::all();
         
-        $articles = Article::all();
+        $articles = Article::limit(4)->get();
 
         $contacts = Contact::all();
 
@@ -56,7 +59,8 @@ class DashboardController extends Controller
                                             'teams' => $teams,
                                             'testimonials' => $testimonials,
                                             'articles' => $articles,  
-                                            'contacts' => $contacts,                                      
+                                            'contacts' => $contacts, 
+                                            'gallery_footer' => $gallery_footer,                                     
                                         ]));
     }
 
@@ -64,34 +68,53 @@ class DashboardController extends Controller
         $aboutContents = Content::where('category', 'about')->get();
         $teamContents = Content::where('category', 'team')->get();
         $teams = Team::all();
+        $contacts = Contact::all();
+        $gallery_footer = Gallery::limit(6)->get();
 
-        return view('dashboard.about', with(['aboutContents'=>$aboutContents, 'teams'=>$teams, 'teamContents'=>$teamContents]));   
+        return view('dashboard.about', with(['gallery_footer'=>$gallery_footer,'contacts'=>$contacts,'aboutContents'=>$aboutContents, 'teams'=>$teams, 'teamContents'=>$teamContents]));   
     }
 
     public function service() {
+        $aboutContents = Content::where('category', 'about')->get();
         $services = Service::all();
         $testimonials = Testimonial::all();
-        $galleries = Gallery::all();
+        $gallery_footer = Gallery::limit(6)->get();
         $gallery_categories = GalleryCategory::all();
         $serviceContents = Content::where('category', 'service')->get();
+        $contacts = Contact::all();
 
-        return view('dashboard.service', with(['services'=>$services, 'testimonials'=>$testimonials, 'serviceContents'=>$serviceContents]));   
+        return view('dashboard.service', with(['contacts'=>$contacts,'services'=>$services, 'testimonials'=>$testimonials, 'serviceContents'=>$serviceContents, 'gallery_footer'=>$gallery_footer, 'aboutContents'=>$aboutContents]));   
     }
 
     public function event() {
+        $aboutContents = Content::where('category', 'about')->get();
+        $gallery_footer = Gallery::limit(6)->get();
         $galleries = Gallery::all();
         $gallery_categories = GalleryCategory::all();
         $eventContents = Content::where('category', 'event')->get();
+        $contacts = Contact::all();
+        
 
-        return view('dashboard.event', with(['galleries'=>$galleries, 'gallery_categories'=>$gallery_categories, 'eventContents'=>$eventContents]));
+        return view('dashboard.event', with(['galleries' => $galleries,'aboutContents'=>$aboutContents,'contacts'=>$contacts,'gallery_footer'=>$gallery_footer, 'gallery_categories'=>$gallery_categories, 'eventContents'=>$eventContents]));
     }
 
     public function testimonial() {
         $testimonials = Testimonial::all();
         $testimonialContents = Content::where('category', 'testimonial')->get();
-     
-        return view('dashboard.testimonial', with(['testimonials'=>$testimonials, 'testimonialContents'=>$testimonialContents]));
+        $aboutContents = Content::where('category', 'about')->get();
+        $contacts = Contact::all();
+        $gallery_footer = Gallery::limit(6)->get();
+
+        return view('dashboard.testimonial', with(['contacts'=>$contacts,'aboutContents'=>$aboutContents,'contacts'=>$contacts,'gallery_footer'=>$gallery_footer,'testimonials'=>$testimonials, 'testimonialContents'=>$testimonialContents]));
     }
 
+    public function contact() {
+        $contacts = contact::all();  
+        $aboutContents = Content::where('category', 'about')->get();
+        $contacts = Contact::all();
+        $gallery_footer = Gallery::limit(6)->get();      
+     
+        return view('dashboard.contact', with(['contacts'=>$contacts,'contacts'=>$contacts,'aboutContents'=>$aboutContents,'gallery_footer'=>$gallery_footer,]));
+    }
 
 }

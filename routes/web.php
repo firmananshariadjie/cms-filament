@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\ContactUsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +25,9 @@ Route::get('/about', [DashboardController::class, 'about'])->name('about');
 Route::get('/service', [DashboardController::class, 'service'])->name('service');
 Route::get('/event', [DashboardController::class, 'event'])->name('event');
 Route::get('/testimonial', [DashboardController::class, 'testimonial'])->name('testimonial');
+Route::get('/contact', [DashboardController::class, 'contact'])->name('contact-show');
 Route::get('/service/{slug}', [ServiceController::class, 'show'])->name('service-show');
 Route::get('/article/{slug}', [ArticleController::class, 'show'])->name('article-show');
+
+Route::post('/contact/send' ,[ContactUsController::class, 'store'])->name('about-send');
 

@@ -15,12 +15,6 @@
                         <h4 class="text-primary">{{ $team->name }}</h4>
                         <p class="text-white mb-0">{{ $team->position }}</p>
                     </div>
-                    <div class="team-icon d-flex flex-column justify-content-center m-4">
-                        <a class="share btn btn-primary btn-md-square rounded-circle mb-2" href=""><i class="fas fa-share-alt"></i></a>
-                        <a class="share-link btn btn-primary btn-md-square rounded-circle mb-2" href=""><i class="fab fa-facebook-f"></i></a>
-                        <a class="share-link btn btn-primary btn-md-square rounded-circle mb-2" href=""><i class="fab fa-twitter"></i></a>
-                        <a class="share-link btn btn-primary btn-md-square rounded-circle mb-2" href=""><i class="fab fa-instagram"></i></a>
-                    </div>
                 </div>
             </div>
             @endforeach()            

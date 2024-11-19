@@ -1,3 +1,11 @@
+<style>
+    .custom-img{
+        height:100px; 
+        width:100px;
+        border-radius:50%; 
+        object-fit:cover;
+    }
+</style>
 <div class="container-fluid footer py-6 my-6 mb-0 bg-light wow bounceInUp" data-wow-delay="0.1s">
         <div class="container">
             <div class="row">
@@ -19,20 +27,21 @@
                     <div class="footer-item">
                         <h4 class="mb-4">Contact Us</h4>
                         <div class="d-flex flex-column align-items-start">
-                            <p><i class="fa fa-map-marker-alt text-primary me-2"></i> 123 Street, New York, USA</p>
-                            <p><i class="fa fa-phone-alt text-primary me-2"></i> (+012) 3456 7890 123</p>
-                            <p><i class="fas fa-envelope text-primary me-2"></i> info@example.com</p>
-                            <p><i class="fa fa-clock text-primary me-2"></i> 26/7 Hours Service</p>
+                            @foreach ($contacts as $data)
+                                <p><i class="fa fa-map-marker-alt text-primary me-2"></i> {{ $data->address }}</p>
+                                <p><i class="fa fa-phone-alt text-primary me-2"></i> {{ $data->telephone1 }}</p>
+                                <p><i class="fas fa-envelope text-primary me-2"></i> {{ $data->mail }}</p>                            
+                            @endforeach
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
-                    <div class="footer-item">
+                    <div class="footer-item">   
                         <h4 class="mb-4">Social Gallery</h4>
                         <div class="row g-2">
-                            @foreach ($galleries as $content) 
+                            @foreach ($gallery_footer as $content) 
                             <div class="col-4">
-                                <img src="{{ asset('storage/' . $content->image) }}" class="img-fluid rounded-circle border border-primary p-2" alt="">
+                                <img src="{{ asset('storage/' . $content->image) }}" class=" border border-primary p-2 custom-img">
                             </div>
                             @endforeach
                         </div>

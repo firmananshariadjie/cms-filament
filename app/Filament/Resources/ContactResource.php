@@ -17,24 +17,23 @@ class ContactResource extends Resource
 {
     protected static ?string $model = Contact::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-phone';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([                
-                Forms\Components\Select::make('category')
-                    ->options([
-                        'addrress' => 'Addrress',
-                        'telephone' => 'Telephone',
-                        'mail' => 'Mail',
-                    ])
-                    ->native(false),
-                Forms\Components\TextInput::make('description')
+                Forms\Components\TextInput::make('address')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\Checkbox::make('status'),
-                    
+                Forms\Components\TextInput::make('mail')
+                    ->required()
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('telephone1')
+                    ->required()
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('telephone2')
+                    ->maxLength(255),
                         
                     
                     
@@ -45,15 +44,15 @@ class ContactResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('category')
+                Tables\Columns\TextColumn::make('address')
                     ->searchable()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('description')
+                Tables\Columns\TextColumn::make('mail')
                     ->searchable()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('created_by')
+                Tables\Columns\TextColumn::make('telephone1')
                     ->sortable(),
-                Tables\Columns\TextColumn::make('status')
+                Tables\Columns\TextColumn::make('telephone2')
                     // ->label('status')
                     
             ])
@@ -62,6 +61,7 @@ class ContactResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -85,4 +85,14 @@ class ContactResource extends Resource
             'edit' => Pages\EditContact::route('/{record}/edit'),
         ];
     }
+
+    public static function canCreate(): bool
+    {
+        // Cek jika tabel sudah memiliki data
+        return Contact::count() === 0;
+    }
+    
+
+    
+
 }

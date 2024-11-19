@@ -10,6 +10,10 @@ class ListContents extends ListRecords
 {
     protected static string $resource = ContentResource::class;
 
+    protected static ?string $title = 'HomePage';
+    
+    
+
     protected function getHeaderActions(): array
     {
         return [

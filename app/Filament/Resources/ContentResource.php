@@ -20,9 +20,10 @@ use Filament\Infolists\Components\ImageEntry;
 
 class ContentResource extends Resource
 {
-    protected static ?string $model = Content::class;
+    protected static ?string $model = Content::class;    
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-home-modern';
+    
 
     public static function form(Form $form): Form
     {
@@ -35,7 +36,8 @@ class ContentResource extends Resource
                     ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', Str::slug($state))),
                 Forms\Components\TextInput::make('slug')
                     ->required()
-                    ->maxLength(255),
+                    ->maxLength(255)
+                    ->hidden(fn ($get) => in_array($get('category'), ['banner', 'about', 'contact','service', 'event', 'team', 'testimonial', 'article'])),
                 Forms\Components\TextInput::make('description')
                     ->required()
                     ->maxLength(255),                                        
@@ -117,7 +119,7 @@ class ContentResource extends Resource
                     ->fileAttachmentsDisk('public')
                     ->fileAttachmentsDirectory('uploads')
                     ->fileAttachmentsVisibility('public')
-                    ->hidden(fn ($get) => in_array($get('category'), ['service', 'event', 'team', 'testimonial', 'article'])),
+                    ->hidden(fn ($get) => in_array($get('category'), ['banner','service', 'event', 'team', 'testimonial', 'article'])),
 
                     
                 
@@ -172,5 +174,15 @@ class ContentResource extends Resource
             'create' => Pages\CreateContent::route('/create'),
             'edit' => Pages\EditContent::route('/{record}/edit'),
         ];
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return 'HomePage'; // Nama menu baru
+    }
+
+    public static function getBreadcrumb(): string
+    {
+        return 'HomePage'; // Nama breadcrumb yang diinginkan
     }
 }
