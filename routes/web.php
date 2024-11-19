@@ -28,6 +28,5 @@ Route::get('/testimonial', [DashboardController::class, 'testimonial'])->name('t
 Route::get('/contact', [DashboardController::class, 'contact'])->name('contact-show');
 Route::get('/service/{slug}', [ServiceController::class, 'show'])->name('service-show');
 Route::get('/article/{slug}', [ArticleController::class, 'show'])->name('article-show');
-
 Route::post('/contact/send' ,[ContactUsController::class, 'store'])->name('about-send');
 

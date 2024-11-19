@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\ContactUs;
+use Filament\Notifications\Notification;
+
 
 class ContactUsController extends Controller
 {
@@ -14,6 +16,6 @@ class ContactUsController extends Controller
         $save->message = $request->message;
 
         $save->save();
-        return redirect()->route('contact-show')->with('success', 'Message sent successfully');
+        return redirect()->route('contact-show')->with('success', 'Akan Kami Response');
     }
 }
