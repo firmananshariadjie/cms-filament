@@ -9,13 +9,21 @@ use Filament\Notifications\Notification;
 
 class ContactUsController extends Controller
 {
-    public function store(Request $request){
-        $save = new ContactUs();
-        $save->name = $request->name;
-        $save->email = $request->email;
-        $save->message = $request->message;
+    public function store(Request $request)
+    {
+        // Validasi data
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'message' => 'required|string',
+        ]);
 
-        $save->save();
-        return redirect()->route('contact-show')->with('success', 'Akan Kami Response');
+        // Simpan data
+        ContactUs::create($validatedData);
+
+        // Redirect dengan pesan sukses
+        return redirect()
+            ->route('contact-show')
+            ->with('success', 'Akan Kami Response');
     }
 }
